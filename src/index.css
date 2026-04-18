@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Cairo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cairo", serif;
+
+  --color-brand-red: #3B82F6;
+  --color-brand-gold: #D4AF37;
+  --color-brand-cream: #020617;
+}
+
+@layer base {
+  body {
+    @apply bg-[#020617] text-slate-100 font-sans;
+    direction: rtl;
+  }
+}
+
+.shadow-luxury {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #F5E050 50%, #D4AF37 100%);
+}
+
+.red-gradient {
+  background: linear-gradient(135deg, #C52128 0%, #E31E24 100%);
+}
