@@ -13,4 +13,4 @@ export interface Category {
   products: Product[];
 }
 
-export type ViewState = 'home' | 'products' | 'social';
+export type ViewState = 'home' | 'products' | 'social' | 'offers' | 'profile';

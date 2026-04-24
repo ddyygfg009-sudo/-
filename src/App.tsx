@@ -9,9 +9,19 @@ import {
   Video, 
   ChevronLeft, 
   Download,
-  AlertCircle
+  AlertCircle,
+  Menu,
+  ShieldCheck,
+  Truck,
+  Star,
+  Leaf,
+  User,
+  Tag,
+  Headphones,
+  ShoppingBag,
+  Globe
 } from 'lucide-react';
-import { CATEGORIES, SOCIAL_LINKS, BRAND_ASSETS } from './constants';
+import { CATEGORIES, SOCIAL_LINKS, BRAND_ASSETS, FEATURES } from './constants';
 import { Category, ViewState } from './types';
 
 // --- Shared Components ---
@@ -21,23 +31,45 @@ const Icon = ({ name, className }: { name: string; className?: string }) => {
     case 'facebook': return <Facebook className={className} />;
     case 'instagram': return <Instagram className={className} />;
     case 'video': return <Video className={className} />;
+    case 'twitter': return <Globe className={className} />;
+    case 'shield': return <ShieldCheck className={className} />;
+    case 'truck': return <Truck className={className} />;
+    case 'badge': return <Star className={className} />;
+    case 'leaf': return <Leaf className={className} />;
+    case 'home': return <Home className={className} />;
+    case 'grid': return <LayoutGrid className={className} />;
+    case 'offers': return <Tag className={className} />;
+    case 'profile': return <User className={className} />;
+    case 'social': return <Headphones className={className} />;
     default: return <AlertCircle className={className} />;
   }
 };
 
-const Header = ({ title, showBack, onBack }: { title: string; showBack?: boolean; onBack?: () => void }) => (
-  <header className="sticky top-0 z-30 bg-[#020617]/80 backdrop-blur-md border-b border-brand-gold/20 px-4 py-4 flex items-center justify-between">
-    <div className="flex items-center gap-3">
+const Header = ({ onBack, showBack }: { onBack?: () => void; showBack?: boolean }) => (
+  <header className="sticky top-0 z-30 bg-[#020617] border-b border-white/5 px-4 py-3 flex items-center justify-between">
+    <div className="flex items-center">
+      {BRAND_ASSETS.logo && (
+        <img src={BRAND_ASSETS.logo} alt="Logo" className="w-10 h-10 object-contain" referrerPolicy="no-referrer" />
+      )}
       {showBack && (
-        <button onClick={onBack} className="p-2 hover:bg-brand-gold/10 rounded-full transition-colors text-brand-red">
+        <button onClick={onBack} className="mr-2 p-2 text-white">
           <ChevronLeft className="w-6 h-6 rotate-180" />
         </button>
       )}
-      <h1 className="text-xl font-display font-bold text-brand-red">{title}</h1>
     </div>
-    {BRAND_ASSETS.logo && (
-      <img src={BRAND_ASSETS.logo} alt="Logo" className="w-10 h-10 rounded-full border border-brand-gold/30 shadow-sm" referrerPolicy="no-referrer" />
-    )}
+    
+    <div className="flex flex-col items-center">
+      <h1 className="text-sm font-bold text-white tracking-wide">شركة هندرين العالمية</h1>
+      <span className="text-[10px] text-brand-gold flex items-center gap-1 mt-0.5">
+        <span>🍃</span>
+        نكهات تصنع الفرق
+        <span>🍃</span>
+      </span>
+    </div>
+
+    <button className="p-2 text-white opacity-80">
+      <Menu className="w-6 h-6" />
+    </button>
   </header>
 );
 
@@ -88,87 +120,135 @@ const LoadingSplash = () => (
   </motion.div>
 );
 
-const HomeView = ({ onCategorySelect }: { onCategorySelect: (cat: Category) => void; key?: string }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    className="pb-32"
-  >
-    <div className="px-4 py-6">
-      <div className="relative rounded-3xl overflow-hidden shadow-luxury mb-8 aspect-[21/9] bg-brand-gold/5 flex items-center justify-center">
-        {BRAND_ASSETS.banner ? (
-          <img 
-            src={BRAND_ASSETS.banner} 
-            alt="Banner" 
-            className="w-full h-full object-cover" 
-            referrerPolicy="no-referrer"
-          />
-        ) : (
-          <div className="text-brand-gold/20 font-display font-bold text-lg italic">Hendren International</div>
-        )}
-      </div>
+const HomeView = ({ onCategorySelect }: { onCategorySelect: (cat: Category) => void; key?: string }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-      <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-xl font-display font-bold text-slate-100 border-r-4 border-brand-red pr-3">منتجاتنا المميزة</h3>
-      </div>
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className="pb-32"
+    >
+      <div className="px-4 py-4">
+        {/* Banner Section */}
+        <div className="relative rounded-3xl overflow-hidden mb-8 aspect-[16/9] bg-brand-gold/5 shadow-2xl">
+          {BRAND_ASSETS.banner ? (
+            <img 
+              src={BRAND_ASSETS.banner} 
+              alt="Banner" 
+              className="w-full h-full object-cover" 
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-brand-gold/20 font-display font-bold text-lg italic">Hendren International</div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
+            <button className="bg-brand-gold/90 text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 w-fit mb-4 shadow-lg hover:scale-105 transition-transform active:scale-95">
+              <ShoppingBag className="w-4 h-4" />
+              <span>تسوق الآن</span>
+            </button>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3 text-white/70">
+                <Facebook className="w-4 h-4" />
+                <Instagram className="w-4 h-4" />
+                <Globe className="w-4 h-4" />
+                <span className="text-[10px] mr-1 opacity-60">hendrenglobalcompany</span>
+              </div>
+              <div className="flex gap-1.5">
+                {[0, 1, 2, 3].map((i) => (
+                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i === currentSlide ? 'bg-white w-4' : 'bg-white/30'} transition-all duration-300`} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        {CATEGORIES.map((cat, index) => (
-          <motion.div
-            key={cat.id}
-            whileHover={{ y: -5 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => onCategorySelect(cat)}
-            className={`group relative bg-[#0F172A] rounded-2xl overflow-hidden shadow-md cursor-pointer border border-brand-gold/10 ${
-              CATEGORIES.length % 2 !== 0 && index === CATEGORIES.length - 1 ? 'col-span-2' : ''
-            }`}
-          >
-    <div className="aspect-square overflow-hidden bg-white/5 flex items-center justify-center p-4">
-              {cat.image ? (
+        {/* Categories Title */}
+        <div className="mb-6 flex flex-col items-center gap-1">
+          <div className="flex items-center gap-3">
+             <span className="text-brand-gold">🍃</span>
+             <h3 className="text-lg font-bold text-slate-100">منتجاتنا المميزة</h3>
+             <span className="text-brand-gold">🍃</span>
+          </div>
+          <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent"></div>
+        </div>
+
+        {/* Categories Grid */}
+        <div className="grid grid-cols-2 gap-4">
+          {CATEGORIES.map((cat, index) => {
+            const isFullWidth = index === CATEGORIES.length - 1;
+            return (
+              <motion.div
+                key={cat.id}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onCategorySelect(cat)}
+                className={`group relative bg-[#0F172A] rounded-2xl overflow-hidden shadow-xl cursor-pointer border border-white/5 h-[160px] ${
+                  isFullWidth ? 'col-span-2' : ''
+                }`}
+              >
                 <img 
                   src={cat.image} 
                   alt={cat.name} 
-                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
-              ) : (
-                <LayoutGrid className="w-12 h-12 text-brand-gold/20" />
-              )}
-            </div>
-            <div className="p-3 bg-[#020617] border-t border-brand-gold/10">
-              <p className="text-sm font-bold text-center text-slate-100 group-hover:text-brand-red transition-colors">{cat.name}</p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Videos Section */}
-      <div className="mt-10">
-        <div className="mb-6 flex items-center justify-between">
-          <h3 className="text-xl font-display font-bold text-slate-100 border-r-4 border-brand-red pr-3">قسم الفيديوهات</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4">
+                  <div className="mb-3">
+                    <p className="text-[10px] text-brand-gold/80 mb-0.5 opacity-0 group-hover:opacity-100 transition-opacity">تصفح الآن</p>
+                    <p className="text-xs font-bold text-white line-clamp-1">{cat.name}</p>
+                  </div>
+                  <button className="bg-brand-green text-white py-1.5 px-4 rounded-lg text-[10px] font-bold flex items-center justify-center gap-2 w-fit active:scale-95 transition-transform">
+                    <ShoppingBag className="w-3 h-3" />
+                    <span>تسوق الآن</span>
+                  </button>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
-        
-        {/* Featured Video Player */}
-        <div className="px-2 mb-6 flex justify-center">
-          <div className="bg-[#0F172A] rounded-3xl overflow-hidden border-2 border-brand-gold/20 shadow-2xl relative w-full max-w-[320px]">
-            <video 
-              controls 
-              className="w-full aspect-[9/16] object-cover"
-              poster="https://j.top4top.io/p_3760cn4bq0.png"
-            >
-              <source src="https://a.top4top.io/m_3760jkp4f0.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent">
-              <h4 className="text-slate-100 font-bold text-sm">فيديو تعريفي - شركة هندرين</h4>
-              <p className="text-slate-400 text-[10px]">جودة عالمية بأيادي عراقية</p>
+
+        {/* Features Section */}
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {FEATURES.map((feature, idx) => (
+            <div key={idx} className="bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center gap-2 shadow-sm min-h-[140px] justify-center">
+              <div className="w-12 h-12 bg-slate-50 text-[#006A4E] flex items-center justify-center rounded-2xl">
+                <Icon name={feature.icon} className="w-6 h-6 stroke-[1.5]" />
+              </div>
+              <p className="text-slate-900 font-bold text-[11px] mt-1">{feature.title}</p>
+              <p className="text-slate-400 text-[9px] leading-relaxed">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Videos Section */}
+        <div className="mt-12">
+          <div className="mb-6 flex flex-col items-center gap-1">
+            <div className="flex items-center gap-3">
+               <span className="text-brand-gold">🎬</span>
+               <h3 className="text-lg font-bold text-slate-100">قسم الفيديوهات</h3>
+               <span className="text-brand-gold">🎬</span>
+            </div>
+            <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent"></div>
+          </div>
+          
+          <div className="flex justify-center px-4">
+            <div className="w-full max-w-[280px] aspect-[9/16] bg-black rounded-3xl overflow-hidden border-2 border-brand-gold/20 shadow-2xl relative">
+              <video 
+                controls 
+                className="w-full h-full object-cover"
+                poster="https://j.top4top.io/p_3760cn4bq0.png"
+              >
+                <source src="https://a.top4top.io/m_3760jkp4f0.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>
 
         {/* TikTok Access */}
-        <div className="px-2">
+        <div className="mt-12 px-2">
           <a 
             href="https://vt.tiktok.com/ZSHwrh2E8/"
             target="_blank"
@@ -202,9 +282,9 @@ const HomeView = ({ onCategorySelect }: { onCategorySelect: (cat: Category) => v
           <span>هيبت خالد</span>
         </a>
       </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 const CategoryDetailView = ({ category, onBack }: { category: Category; onBack: () => void; key?: string }) => {
   const handleDownload = (imageUrl: string, name: string) => {
@@ -220,7 +300,7 @@ const CategoryDetailView = ({ category, onBack }: { category: Category; onBack: 
       exit={{ x: -300, opacity: 0 }}
       className="pb-20 bg-[#020617] min-h-screen"
     >
-      <Header title={category.name} showBack onBack={onBack} />
+      <Header showBack onBack={onBack} />
       
       <div className="p-4 grid grid-cols-1 gap-6">
         {category.products.map((product) => (
@@ -376,7 +456,7 @@ export default function App() {
               />
             ) : (
               <div key="main" className="flex-1">
-                <Header title="شركة هندرين العالمية" />
+                <Header onBack={handleBack} showBack={!!selectedCategory} />
                 
                 <AnimatePresence mode="wait">
                   {activeView === 'home' && (
@@ -384,7 +464,7 @@ export default function App() {
                   )}
                   {activeView === 'products' && (
                     <div key="products" className="px-4 py-8 pb-32">
-                      <h2 className="text-2xl font-display font-bold text-brand-red mb-6">كافة الأقسام</h2>
+                      <h2 className="text-2xl font-display font-bold text-white mb-6">كافة الأقسام</h2>
                       <div className="grid grid-cols-1 gap-4">
                         {CATEGORIES.map((cat) => (
                           <div 
@@ -406,6 +486,20 @@ export default function App() {
                     </div>
                   )}
                   {activeView === 'social' && <SocialView key="social" />}
+                  {activeView === 'offers' && (
+                    <div key="offers" className="px-4 py-12 flex flex-col items-center justify-center text-center">
+                      <Tag className="w-16 h-16 text-brand-gold/20 mb-4" />
+                      <h2 className="text-2xl font-bold text-white mb-2">العروض والخصومات</h2>
+                      <p className="text-slate-400">تابعونا باستمرار لمشاهدة أحدث العروض</p>
+                    </div>
+                  )}
+                  {activeView === 'profile' && (
+                    <div key="profile" className="px-4 py-12 flex flex-col items-center justify-center text-center">
+                      <User className="w-16 h-16 text-brand-gold/20 mb-4" />
+                      <h2 className="text-2xl font-bold text-white mb-2">حسابي</h2>
+                      <p className="text-slate-400">سجل الدخول لمشاهدة تفضيلاتك</p>
+                    </div>
+                  )}
                 </AnimatePresence>
               </div>
             )}
@@ -413,26 +507,51 @@ export default function App() {
 
           {/* Bottom Navigation */}
           {!selectedCategory && (
-            <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-[#020617]/80 backdrop-blur-lg border-t border-brand-gold/20 flex justify-around items-center py-3 px-6 z-40 rounded-t-3xl shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-              <NavButton 
-                active={activeView === 'home'} 
-                onClick={() => setActiveView('home')} 
-                icon={<Home />} 
-                label="الرئيسية" 
-              />
-              <NavButton 
-                active={activeView === 'products'} 
-                onClick={() => setActiveView('products')} 
-                icon={<LayoutGrid />} 
-                label="الأقسام" 
-              />
-              <NavButton 
-                active={activeView === 'social'} 
-                onClick={() => setActiveView('social')} 
-                icon={<Share2 />} 
-                label="تواصل" 
-              />
-            </nav>
+            <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 px-3 pb-3 overflow-visible">
+              <nav className="bg-[#020617] border border-white/10 flex justify-around items-center pt-2 pb-2 px-1 rounded-3xl shadow-2xl relative overflow-visible h-[72px]">
+                <NavButton 
+                  active={activeView === 'social'} 
+                  onClick={() => setActiveView('social')} 
+                  icon={<Headphones />} 
+                  label="تواصل" 
+                />
+                <NavButton 
+                  active={activeView === 'products'} 
+                  onClick={() => setActiveView('products')} 
+                  icon={<LayoutGrid />} 
+                  label="الأقسام" 
+                />
+                
+                {/* Central Home Button */}
+                <div className="relative -top-5">
+                  <div className={`absolute inset-0 blur-2xl rounded-full ${activeView === 'home' ? 'bg-brand-red/40' : 'bg-brand-gold/10'}`}></div>
+                  <button 
+                    onClick={() => setActiveView('home')}
+                    className={`relative w-14 h-14 rounded-full flex flex-col items-center justify-center transition-all duration-500 border-2 ${
+                      activeView === 'home' 
+                        ? 'bg-[#006A4E] border-white shadow-[0_4px_20px_rgba(0,106,78,0.4)] scale-110' 
+                        : 'bg-[#020617] border-white/20'
+                    }`}
+                  >
+                    <Home className={`w-6 h-6 mb-0.5 ${activeView === 'home' ? 'text-white' : 'text-slate-400'}`} />
+                    <span className={`text-[9px] font-bold ${activeView === 'home' ? 'text-white' : 'text-slate-400'}`}>الرئيسية</span>
+                  </button>
+                </div>
+
+                <NavButton 
+                  active={activeView === 'offers'} 
+                  onClick={() => setActiveView('offers')} 
+                  icon={<Tag />} 
+                  label="العروض" 
+                />
+                <NavButton 
+                  active={activeView === 'profile'} 
+                  onClick={() => setActiveView('profile')} 
+                  icon={<User />} 
+                  label="حسابي" 
+                />
+              </nav>
+            </div>
           )}
         </div>
       )}
@@ -444,18 +563,14 @@ function NavButton({ active, onClick, icon, label }: { active: boolean; onClick:
   return (
     <button 
       onClick={onClick}
-      className={`flex flex-col items-center gap-1 transition-all duration-300 ${active ? 'text-brand-red scale-110' : 'text-neutral-400'}`}
+      className={`flex flex-col items-center gap-0.5 transition-all duration-300 w-12 ${active ? 'text-brand-gold' : 'text-slate-500'}`}
     >
-      <div className={`${active ? 'bg-brand-red/10 p-2 rounded-xl' : ''}`}>
-        {icon}
+      <div className="mb-0.5">
+        {icon && (icon as any).type ? (
+           <span className="*:w-5 *:h-5">{icon}</span>
+        ) : icon}
       </div>
-      <span className="text-[10px] font-bold">{label}</span>
-      {active && (
-        <motion.div 
-          layoutId="nav-indicator"
-          className="absolute -bottom-1 w-1 h-1 bg-brand-red rounded-full"
-        />
-      )}
+      <span className="text-[9px] font-bold whitespace-nowrap">{label}</span>
     </button>
   );
 }

@@ -3,6 +3,22 @@ import { Category } from './types';
 
 export const CATEGORIES: Category[] = [
   {
+    id: 'chips-abualabed',
+    name: 'قسم شيبس ابو العبد',
+    image: 'https://l.top4top.io/p_376062uux0.jpg',
+    products: [
+      { id: 'a1', name: 'فشار شامية', image: 'https://f.top4top.io/p_3760hy1tn0.jpeg' },
+      { id: 'a2', name: 'فستق مملح', image: 'https://g.top4top.io/p_37607yoce1.jpeg' },
+      { id: 'a3', name: 'نكهة خاصة 1', image: 'https://h.top4top.io/p_3760apef12.jpeg' },
+      { id: 'a4', name: 'نكهة خاصة 2', image: 'https://i.top4top.io/p_3760xjcgo3.jpeg' },
+      { id: 'a5', name: 'نكهة خاصة 3', image: 'https://j.top4top.io/p_37602zs274.jpeg' },
+      { id: 'a6', name: 'نكهة خاصة 4', image: 'https://k.top4top.io/p_376090vxi5.jpeg' },
+      { id: 'a7', name: 'نكهة خاصة 5', image: 'https://l.top4top.io/p_3760nduyf6.jpeg' },
+      { id: 'a8', name: 'نكهة خاصة 6', image: 'https://a.top4top.io/p_3760pw41n7.jpeg' },
+      { id: 'a9', name: 'نكهة خاصة 7', image: 'https://b.top4top.io/p_3760fuuvj8.jpeg' },
+    ]
+  },
+  {
     id: 'chips-hendren',
     name: 'قسم شيبس هندرين',
     image: 'https://g.top4top.io/p_3760vbxfq0.jpg',
@@ -44,19 +60,15 @@ export const CATEGORIES: Category[] = [
     ]
   },
   {
-    id: 'chips-abualabed',
-    name: 'قسم شيبس ابو العبد',
-    image: 'https://l.top4top.io/p_376062uux0.jpg',
+    id: 'juice-spring',
+    name: 'قسم عصير وقت الربيع',
+    image: 'https://j.top4top.io/p_3760gk6mf0.jpg',
     products: [
-      { id: 'a1', name: 'فشار شامية', image: 'https://f.top4top.io/p_3760hy1tn0.jpeg' },
-      { id: 'a2', name: 'فستق مملح', image: 'https://g.top4top.io/p_37607yoce1.jpeg' },
-      { id: 'a3', name: 'نكهة خاصة 1', image: 'https://h.top4top.io/p_3760apef12.jpeg' },
-      { id: 'a4', name: 'نكهة خاصة 2', image: 'https://i.top4top.io/p_3760xjcgo3.jpeg' },
-      { id: 'a5', name: 'نكهة خاصة 3', image: 'https://j.top4top.io/p_37602zs274.jpeg' },
-      { id: 'a6', name: 'نكهة خاصة 4', image: 'https://k.top4top.io/p_376090vxi5.jpeg' },
-      { id: 'a7', name: 'نكهة خاصة 5', image: 'https://l.top4top.io/p_3760nduyf6.jpeg' },
-      { id: 'a8', name: 'نكهة خاصة 6', image: 'https://a.top4top.io/p_3760pw41n7.jpeg' },
-      { id: 'a9', name: 'نكهة خاصة 7', image: 'https://b.top4top.io/p_3760fuuvj8.jpeg' },
+      { id: 's1', name: 'عصير وقت الربيع - صنف 1', image: 'https://i.top4top.io/p_3760jfohw0.png' },
+      { id: 's2', name: 'عصير وقت الربيع - صنف 2', image: 'https://j.top4top.io/p_3760bo1um1.png' },
+      { id: 's3', name: 'عصير وقت الربيع - صنف 3', image: 'https://k.top4top.io/p_3760v3le82.png' },
+      { id: 's4', name: 'عصير وقت الربيع - صنف 4', image: 'https://l.top4top.io/p_37603o91t3.png' },
+      { id: 's5', name: 'عصير وقت الربيع - صنف 5', image: 'https://a.top4top.io/p_3760m9ei44.png' },
     ]
   },
   {
@@ -70,18 +82,6 @@ export const CATEGORIES: Category[] = [
       { id: 'c4', name: 'كب كيك كراميل', image: 'https://l.top4top.io/p_3760n3awv3.jpeg' },
       { id: 'c5', name: 'كب كيك مشكل 1', image: 'https://a.top4top.io/p_3760rsa6k4.jpeg' },
       { id: 'c6', name: 'كب كيك مشكل 2', image: 'https://b.top4top.io/p_3760913l85.jpeg' },
-    ]
-  },
-  {
-    id: 'juice-spring',
-    name: 'قسم عصير وقت الربيع',
-    image: 'https://j.top4top.io/p_3760gk6mf0.jpg',
-    products: [
-      { id: 's1', name: 'عصير وقت الربيع - صنف 1', image: 'https://i.top4top.io/p_3760jfohw0.png' },
-      { id: 's2', name: 'عصير وقت الربيع - صنف 2', image: 'https://j.top4top.io/p_3760bo1um1.png' },
-      { id: 's3', name: 'عصير وقت الربيع - صنف 3', image: 'https://k.top4top.io/p_3760v3le82.png' },
-      { id: 's4', name: 'عصير وقت الربيع - صنف 4', image: 'https://l.top4top.io/p_37603o91t3.png' },
-      { id: 's5', name: 'عصير وقت الربيع - صنف 5', image: 'https://a.top4top.io/p_3760m9ei44.png' },
     ]
   },
   {
@@ -129,6 +129,29 @@ export const SOCIAL_LINKS = [
     name: 'TikTok 3',
     url: 'https://vt.tiktok.com/ZSHwrh2E8/',
     icon: 'video'
+  }
+];
+
+export const FEATURES = [
+  {
+    icon: 'shield',
+    title: '100% آمن',
+    desc: 'تسوق بثقة وأمان'
+  },
+  {
+    icon: 'truck',
+    title: 'توصيل سريع',
+    desc: 'خدمة توصيل موثوقة'
+  },
+  {
+    icon: 'badge',
+    title: 'نكهات مميزة',
+    desc: 'طعم لا يُنسى'
+  },
+  {
+    icon: 'leaf',
+    title: 'جودة عالية',
+    desc: 'منتجات مختارة بعناية'
   }
 ];
 
